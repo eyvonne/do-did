@@ -3,7 +3,7 @@ from os import makedirs
 from configure import configure
 import datetime
 import sys
-from formatting import did
+from formatting import format
 
 def _write_task_to_disk(vault_path, status, month, day, task):
     dir_path = f'{vault_path}/{status}/{month}'
@@ -14,9 +14,16 @@ def _write_task_to_disk(vault_path, status, month, day, task):
 
 def write_task():
     vault_path = configure()['vault_path']
-    status = sys.argv[0]
-    task = format(sys.argv[1:])
+    integrations = {'did.py': 'did',
+                'did':'did',
+                'note': 'notes',
+                'do': 'todo'}
+    status = integrations.get(sys.argv[0], 'notes')
+    task = format(sys.argv)
     month_path = datetime.date.today().strftime("%Y/%m")
     day_path = datetime.date.today().strftime("%d_%A") +".md"
     _write_task_to_disk(vault_path, status, month_path, day_path, task)
 
+
+if __name__ == '__main__':
+    write_task()
