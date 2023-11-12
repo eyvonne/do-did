@@ -1,6 +1,6 @@
 from os import symlink, makedirs
 from os.path import expanduser, isdir
-from integrations import commands
+from integrations import commands, formats
 import sys
 from distutils.dir_util import copy_tree
 
@@ -27,9 +27,11 @@ def add_tools_to_path():
     with open(f'{expanduser("~")}/.zshrc', 'a') as zshrc:
         zshrc.write(f'export PATH=$PATH:{get_tools_dir()}')
 
-def create_symlinks(statuses, tool):
-    for status in statuses: 
+def create_symlinks(statuses, styles, tool):
+    for status in statuses:
         symlink(tool, get_tools_dir()+status)
+        for style in styles:
+            symlink(tool, get_tools_dir()+f'{status}.{style}')
 
 def install():
     if not confirm(get_tools_dir()):
@@ -39,7 +41,7 @@ def install():
     tool_origin = '../__init__/'
     tool_destination = get_tools_dir() + 'do_did/'
     copy_tree(tool_origin, tool_destination)
-    create_symlinks(commands.keys(), tool_destination+'__init__')
+    create_symlinks(commands.keys(), formats.keys(), tool_destination+'__init__')
 
 if __name__ == '__main__':
     install()
