@@ -28,7 +28,6 @@ def format_task(task_list, format):
     return formatted_task
 
 def write_task():
-    print(sys.argv)
     vault_path = configure()['vault_path']
     status, format = _get_status_format(sys.argv[0])
     task = format_task(sys.argv[1:], format)

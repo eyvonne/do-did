@@ -1,6 +1,6 @@
 import os, json
 home = os.path.expanduser("~") + '/'
-config_path = f'{home}/.do_did.json'
+config_path = f'{home}/.dev_tools/do_did/.do_did.json'
 
 def configure():
     if os.path.isfile(config_path):

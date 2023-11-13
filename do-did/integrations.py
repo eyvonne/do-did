@@ -15,10 +15,14 @@ note = {path:'note',
 # this is the exported command mapping
 commands = {'todo': do,
             'did': did,
-            'did.py': did,
             'note': note}
 
 # and the formatting mapping
 formats = {'list': bullets,
            'list_time': bullets_with_hhmm,
-           'checkbox': checkboxes}
+           'checkbox': checkboxes,
+           'h1': h1,
+           'h2': h2,
+           'h3': h3,
+           'h4': h4,
+           'num_list': num_list}
